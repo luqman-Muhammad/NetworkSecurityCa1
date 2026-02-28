@@ -1,0 +1,30 @@
+<group name="local,linux,windows,">
+  <rule id="100002" level="12">
+    <if_sid>5402</if_sid>
+    <match>/etc/shadow</match>
+    <description>CRITICAL: Unauthorized attempt to read shadow file</description>
+  </rule>
+  <rule id="100003" level="10">
+    <if_sid>5402</if_sid>
+    <match>ss -antp|ip addr|ip link</match>
+    <description>DISCOVERY: Reconnaissance of network interfaces detected</description>
+    <group>mitre_T1016,discovery,</group>
+  </rule>
+  <rule id="100004" level="13">
+    <if_sid>61603</if_sid>
+    <match>-EncodedCommand|-e </match>
+    <description>DEFENSE EVASION: Encoded PowerShell detected</description>
+  </rule>
+  <rule id="100005" level="8">
+    <if_sid>5402</if_sid>
+    <match>cat /etc/passwd|getent passwd</match>
+    <description>DISCOVERY: Enumeration of system users detected</description>
+    <group>mitre_T1087,discovery,</group>
+  </rule>
+  <rule id="100006" level="12" frequency="5" timeframe="60">
+    <if_matched_sid>5710</if_matched_sid>
+    <same_source_ip />
+    <description>TRIAL TRIAGE: Possible Brute Force Attack</description>
+    <group>authentication_failures,mitre_T1110,</group>
+  </rule>
+</group>

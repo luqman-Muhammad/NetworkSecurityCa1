@@ -1,0 +1,25 @@
+[2026-02-25 15:08:03 UTC] ============================================================
+[2026-02-25 15:08:03 UTC] Rule 100004 | CRITICAL | Agent: Window-agent
+[2026-02-25 15:08:03 UTC] Alert: DEFENSE EVASION: Encoded PowerShell detected
+[2026-02-25 15:08:12 UTC] AI Recommendation: A suspicious PowerShell executable was dropped in the Temp folder by user luqative on the Windows endpoint, which may indicate an initial stage of a malware deployment or command-and-control setup. Immediately isolate the affected endpoint, remove the suspicious file from C:\Users\luqative\AppData\Local\Temp\, and conduct a full investigation of the luqative account's recent activity including PowerShell history and network connections.
+[2026-02-25 15:08:12 UTC] ============================================================
+[2026-02-25 15:20:01 UTC] ============================================================
+[2026-02-25 15:20:01 UTC] Rule 100006 | HIGH | Agent: linix-agent
+[2026-02-25 15:20:01 UTC] Alert: TRIAL TRIAGE: Possible Brute Force Attack
+[2026-02-25 15:20:09 UTC] AI Recommendation: Multiple failed SSH login attempts from IP 164.90.188.65 indicate an active brute force attack against the Linux endpoint. Block the offending IP address immediately at the network perimeter firewall and review /var/log/auth.log to confirm no successful authentication occurred from that source.
+[2026-02-25 15:20:09 UTC] ============================================================
+[2026-02-25 15:24:01 UTC] ============================================================
+[2026-02-25 15:24:01 UTC] Rule 100002 | CRITICAL | Agent: linix-agent
+[2026-02-25 15:24:01 UTC] Alert: CRITICAL: Unauthorized attempt to read shadow file
+[2026-02-25 15:24:15 UTC] AI Recommendation: The luqative account used sudo to read /etc/shadow, which contains hashed passwords for all system accounts — this is a clear credential harvesting attempt (MITRE T1003.008). Immediately revoke sudo privileges for the luqative account, rotate all system account passwords, and audit whether any credentials were exfiltrated to an external destination.
+[2026-02-25 15:24:15 UTC] ============================================================
+[2026-02-25 15:24:02 UTC] ============================================================
+[2026-02-25 15:24:02 UTC] Rule 100003 | HIGH | Agent: linix-agent
+[2026-02-25 15:24:02 UTC] Alert: DISCOVERY: Reconnaissance of network interfaces detected
+[2026-02-25 15:24:18 UTC] AI Recommendation: The attacker ran sudo ss -antp to map all active network connections and listening services on the Linux endpoint, consistent with pre-lateral-movement reconnaissance (MITRE T1016). Review all outbound connections from this host in the last 30 minutes and check for any unexpected connections to internal subnets that could indicate lateral movement in progress.
+[2026-02-25 15:24:18 UTC] ============================================================
+[2026-02-25 15:24:03 UTC] ============================================================
+[2026-02-25 15:24:03 UTC] Rule 100005 | MEDIUM | Agent: linix-agent
+[2026-02-25 15:24:03 UTC] Alert: DISCOVERY: Enumeration of system users detected
+[2026-02-25 15:24:14 UTC] AI Recommendation: The luqative account used sudo to read /etc/passwd, enumerating all user accounts on the system to build a target list for further credential attacks or privilege escalation (MITRE T1087). Cross-reference this event with the earlier brute force and shadow file access to confirm a coordinated intrusion — escalate to incident response immediately.
+[2026-02-25 15:24:14 UTC] ============================================================

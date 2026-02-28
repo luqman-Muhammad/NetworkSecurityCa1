@@ -1,0 +1,60 @@
+[2026-02-25 15:08:03 UTC] ============================================================
+[2026-02-25 15:08:03 UTC] PLAYBOOK: Encoded PowerShell Response
+[2026-02-25 15:08:03 UTC] Rule ID : 100004 | MITRE: T1059.001
+[2026-02-25 15:08:03 UTC] Agent   : Window-agent | User: luqative
+[2026-02-25 15:08:03 UTC] Alert   : DEFENSE EVASION: Encoded PowerShell detected
+[2026-02-25 15:08:03 UTC] ------------------------------------------------------------
+[2026-02-25 15:08:03 UTC] ACTION: LOG: CRITICAL_POWERSHELL_ALERT — encoded command executed
+[2026-02-25 15:08:03 UTC] ACTION: NOTIFY: Security team — investigate Temp folder contents immediately
+[2026-02-25 15:08:03 UTC] ACTION: VERIFY: Check C:\Users\luqative\AppData\Local\Temp\ for dropped files
+[2026-02-25 15:08:03 UTC] ROLLBACK PLAN: Delete any files created in Temp; review PowerShell history
+[2026-02-25 15:08:12 UTC] AI RECOMMENDATION: A suspicious PowerShell executable was dropped in the Temp folder by user luqative... [truncated — see ai-remediation.log]
+[2026-02-25 15:08:12 UTC] ============================================================
+[2026-02-25 15:20:01 UTC] ============================================================
+[2026-02-25 15:20:01 UTC] PLAYBOOK: SSH Brute Force Response
+[2026-02-25 15:20:01 UTC] Rule ID : 100006 | MITRE: T1110
+[2026-02-25 15:20:01 UTC] Agent   : linix-agent | User: invalid_user
+[2026-02-25 15:20:01 UTC] Alert   : TRIAL TRIAGE: Possible Brute Force Attack
+[2026-02-25 15:20:01 UTC] ------------------------------------------------------------
+[2026-02-25 15:20:01 UTC] ACTION: LOG: BRUTE_FORCE_ALERT — 5+ SSH failures in 60 seconds
+[2026-02-25 15:20:01 UTC] ACTION: NOTIFY: Security team — block source IP at perimeter firewall
+[2026-02-25 15:20:01 UTC] ACTION: VERIFY: Confirm no successful logins from the offending IP
+[2026-02-25 15:20:01 UTC] ROLLBACK PLAN: Remove iptables rule: sudo iptables -D INPUT -s <IP> -j DROP
+[2026-02-25 15:20:09 UTC] AI RECOMMENDATION: Multiple failed SSH login attempts from IP 164.90.188.65... [truncated — see ai-remediation.log]
+[2026-02-25 15:20:09 UTC] ============================================================
+[2026-02-25 15:24:01 UTC] ============================================================
+[2026-02-25 15:24:01 UTC] PLAYBOOK: Shadow File Access Response
+[2026-02-25 15:24:01 UTC] Rule ID : 100002 | MITRE: T1003.008
+[2026-02-25 15:24:01 UTC] Agent   : linix-agent | User: luqative
+[2026-02-25 15:24:01 UTC] Alert   : CRITICAL: Unauthorized attempt to read shadow file
+[2026-02-25 15:24:01 UTC] ------------------------------------------------------------
+[2026-02-25 15:24:01 UTC] ACTION: LOG: CREDENTIAL_ACCESS_ALERT — shadow file read by non-root process
+[2026-02-25 15:24:01 UTC] ACTION: NOTIFY: Security team — investigate luqative account immediately
+[2026-02-25 15:24:01 UTC] ACTION: VERIFY: Check /var/log/auth.log for follow-on lateral movement
+[2026-02-25 15:24:01 UTC] ROLLBACK PLAN: Remove any new accounts created; rotate compromised credentials
+[2026-02-25 15:24:15 UTC] AI RECOMMENDATION: The luqative account used sudo to read /etc/shadow... [truncated — see ai-remediation.log]
+[2026-02-25 15:24:15 UTC] ============================================================
+[2026-02-25 15:24:02 UTC] ============================================================
+[2026-02-25 15:24:02 UTC] PLAYBOOK: Network Reconnaissance Response
+[2026-02-25 15:24:02 UTC] Rule ID : 100003 | MITRE: T1016
+[2026-02-25 15:24:02 UTC] Agent   : linix-agent | User: luqative
+[2026-02-25 15:24:02 UTC] Alert   : DISCOVERY: Reconnaissance of network interfaces detected
+[2026-02-25 15:24:02 UTC] ------------------------------------------------------------
+[2026-02-25 15:24:02 UTC] ACTION: LOG: DISCOVERY_ALERT — network recon via sudo detected
+[2026-02-25 15:24:02 UTC] ACTION: NOTIFY: Security team — attacker may be preparing lateral movement
+[2026-02-25 15:24:02 UTC] ACTION: VERIFY: Review recent outbound connections from this host
+[2026-02-25 15:24:02 UTC] ROLLBACK PLAN: No system changes made — advisory action only
+[2026-02-25 15:24:18 UTC] AI RECOMMENDATION: The attacker ran sudo ss -antp to map all active network connections... [truncated — see ai-remediation.log]
+[2026-02-25 15:24:18 UTC] ============================================================
+[2026-02-25 15:24:03 UTC] ============================================================
+[2026-02-25 15:24:03 UTC] PLAYBOOK: User Enumeration Response
+[2026-02-25 15:24:03 UTC] Rule ID : 100005 | MITRE: T1087
+[2026-02-25 15:24:03 UTC] Agent   : linix-agent | User: luqative
+[2026-02-25 15:24:03 UTC] Alert   : DISCOVERY: Enumeration of system users detected
+[2026-02-25 15:24:03 UTC] ------------------------------------------------------------
+[2026-02-25 15:24:03 UTC] ACTION: LOG: DISCOVERY_ALERT — user enumeration via sudo detected
+[2026-02-25 15:24:03 UTC] ACTION: NOTIFY: Security team — attacker building target list
+[2026-02-25 15:24:03 UTC] ACTION: VERIFY: Cross-reference with brute force attempts on same host
+[2026-02-25 15:24:03 UTC] ROLLBACK PLAN: No system changes made — advisory action only
+[2026-02-25 15:24:14 UTC] AI RECOMMENDATION: The luqative account used sudo to read /etc/passwd... [truncated — see ai-remediation.log]
+[2026-02-25 15:24:14 UTC] ============================================================
