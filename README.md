@@ -5,7 +5,8 @@
 
 ## Overview
 
-This repository contains all artefacts for the B9CY110 Endpoint Security Assessment. The project builds a controlled Azure lab that simulates a breach against a fictitious retail organisation (Larkspur Retail Group), detects attacker techniques using Wazuh SIEM, and automates alert triage using a Dockerised AI stack (Ollama Phi-3).
+This repository contains all artefacts for the B9CY110 Endpoint Security Assessment. The project builds a controlled Azure lab that simulates a breach against 
+a fictitious retail organisation (Larkspur Retail Group), detects attacker techniques using Wazuh SIEM, and automates alert triage using a Dockerised AI stack (Ollama Phi-3).
 
 ---
 
