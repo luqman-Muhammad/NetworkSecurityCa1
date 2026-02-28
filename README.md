@@ -22,19 +22,6 @@ All VMs run in Azure France Central on the same virtual network (`vnet-francecen
 
 ---
 
-## Repository Structure
-
-```
-larkspur-endpoint-security/
-├── breach_demo.sh          # 5-phase Linux breach simulation script
-├── triage_ai.py            # AI alert triage — monitors Wazuh alerts, calls Ollama Phi-3
-├── Dockerfile              # Docker build file for ai-security-stack container
-├── local_rules.xml         # 5 custom Wazuh detection rules mapped to MITRE ATT&CK
-└── README.md               # This file
-```
-
----
-
 ## Files Explained
 
 ### `breach_demo.sh`
