@@ -19,7 +19,7 @@ def get_ai_response(alert_text):
         return "AI Connection Error. Check if 'ollama serve' is running."
 
 def monitor_logs():
-    print("--- AI SOC ANALYST: WAITING FOR 3 UNIQUE REMEDIATIONS ---")
+    print("--- AI SOC ANALYST: WAITING FOR 5 UNIQUE REMEDIATIONS ---")
     seen_alerts = set()
     count = 0
 
@@ -27,7 +27,7 @@ def monitor_logs():
     command = f"tail -n 0 -F {ALERTS_PATH}"
     p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
 
-    while count < 3:
+    while count < 5:
         line = p.stdout.readline().decode('utf-8')
         if not line:
             continue
@@ -42,7 +42,7 @@ def monitor_logs():
                 count += 1
                 seen_alerts.add(desc)
 
-                print(f"\n[!] ALERT {count}/3: {desc}")
+                print(f"\n[!] ALERT {count}/5: {desc}")
                 print("[*] Consulting AI Analyst...")
 
                 recommendation = get_ai_response(desc)
@@ -50,13 +50,13 @@ def monitor_logs():
 
                 # Save to log file for project evidence
                 with open("/tmp/remediation_final.log", "a") as f:
-                    f.write(f"--- REMEDY {count}/3 ---\n")
+                    f.write(f"--- REMEDY {count}/5 ---\n")
                     f.write(f"Alert: {desc}\n")
                     f.write(f"AI Remedy: {recommendation}\n\n")
         except:
             continue
 
-    print("\n--- GOAL REACHED: 3 REMEDIATIONS COMPLETED ---")
+    print("\n--- GOAL REACHED: 5 REMEDIATIONS COMPLETED ---")
     print("Final log saved to: /tmp/remediation_final.log")
     p.terminate()
 
